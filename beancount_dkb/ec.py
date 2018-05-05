@@ -119,7 +119,9 @@ class ECImporter(importer.ImporterProtocol):
                             line['Buchungstext'],
                             line['Auftraggeber / Begünstigter']
                         )
-                        narration = line['Verwendungszweck']
+                        narration = line['Verwendungszweck'].trim()
+                        # often there's a lot of extra whitespace in here, remove them
+                        narration = re.sub("\s{2,}", " ", narration)
 
                         postings = [
                             data.Posting(self.account, amount, None, None,
