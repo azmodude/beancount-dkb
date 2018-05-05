@@ -123,7 +123,7 @@ class ECImporter(importer.ImporterProtocol):
                         payee = "{} {}".format(
                             line["Buchungstext"], line["Auftraggeber / Begünstigter"]
                         )
-                        narration = line["Verwendungszweck"].trim()
+                        narration = line["Verwendungszweck"].strip()
                         # often there's a lot of extra whitespace in here, remove them
                         narration = re.sub("\s{2,}", " ", narration)
 
