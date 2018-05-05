@@ -115,10 +115,11 @@ class ECImporter(importer.ImporterProtocol):
                                          None, None)
                         )
                     else:
-                        description = '{} {}'.format(
+                        payee = '{} {}'.format(
                             line['Buchungstext'],
                             line['Auftraggeber / Begünstigter']
                         )
+                        narration = line['Verwendungszweck']
 
                         postings = [
                             data.Posting(self.account, amount, None, None,
@@ -126,8 +127,8 @@ class ECImporter(importer.ImporterProtocol):
                         ]
 
                         entries.append(
-                            data.Transaction(meta, date, self.FLAG, None,
-                                             description, data.EMPTY_SET,
+                            data.Transaction(meta, date, self.FLAG, payee,
+                                             narration, data.EMPTY_SET,
                                              data.EMPTY_SET, postings)
                         )
 
